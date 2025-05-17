@@ -43,6 +43,8 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
+          remarkPlugins: [require('remark-math')],
+          rehypePlugins: [require('rehype-katex')],
        },
         blog: {
           showReadingTime: true,
