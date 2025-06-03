@@ -22,7 +22,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
+  organizationName: 'furkan_vka', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -66,7 +66,6 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'Benim Sitem',
@@ -95,7 +94,6 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
         links: [
           {
             title: 'Notlar',
@@ -115,7 +113,7 @@ const config = {
             items: [
               {
                 label: 'LinkedIn',
-                href: 'https://www.linkedin.com/in/furkan-vural-508b2028b/', // kendi profilin varsa ekle
+                href: 'https://www.linkedin.com/in/furkan-vural-508b2028b/', 
               },
             ],
           },
@@ -128,7 +126,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/furkanvka', // kendi GitHub projenle değiştir
+                href: 'https://github.com/furkanvka',
               },
             ],
           },

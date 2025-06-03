@@ -3,28 +3,48 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
-@import 'katex/dist/katex.min.css';
-/* You can override the default Infima variables here. */
-:root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-}
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+@import 'katex/dist/katex.min.css';
+
+/* Açık Tema: Kahverengi & Açık Mavi */
+:root {
+  --ifm-color-primary: #8b5e3c;
+  --ifm-color-primary-dark: #7a5134;
+  --ifm-color-primary-darker: #69452d;
+  --ifm-color-primary-darkest: #583926;
+  --ifm-color-primary-light: #a06e49;
+  --ifm-color-primary-lighter: #b37e57;
+  --ifm-color-primary-lightest: #c68f65;
+
+  --ifm-footer-background-color: #8b5e3c;
+  --ifm-footer-color: #e0f1f9;
+  --ifm-footer-link-color: #90c6e0;
+  --ifm-footer-link-hover-color: #ffffff;
+
+  --ifm-background-color: #fffaf5; 
+  --ifm-font-family-base: 'Segoe UI', sans-serif;
+  --ifm-heading-font-family: 'Georgia', serif;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
+  --ifm-code-background: #f6f1eb; 
+}
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #1E5128;         /* Yeni koyu yeşil ana renk */
+  --ifm-color-primary-dark: #17421E;    /* Biraz daha koyu ton */
+  --ifm-color-primary-darker: #123616;  /* Daha koyu zümrüt yeşil */
+  --ifm-color-primary-darkest: #0D290F; /* En koyu ton */
+  --ifm-color-primary-light: #3B7B46;   /* Açık vurgu */
+  --ifm-color-primary-lighter: #52955E;
+  --ifm-color-primary-lightest: #70C89B;
+
+  --ifm-footer-background-color: #1E5128; /* Footer ve primary aynı renk */
+  --ifm-footer-color: #FFE8D6;             /* Açık turuncu/bej */
+  --ifm-footer-link-color: #FFB347;        /* Canlı turuncu */
+  --ifm-footer-link-hover-color: #FFF5E6;  /* Hafif beyaz ton hover */
+
+  --ifm-background-color: #1E5128;         /* Genel arka plan koyu yeşil */
+  --ifm-font-family-base: 'Segoe UI', sans-serif;
+  --ifm-heading-font-family: 'Georgia', serif;
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.07);
 }

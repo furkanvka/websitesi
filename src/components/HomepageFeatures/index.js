@@ -26,7 +26,7 @@ const FeatureList = [
     Svg: require('@site/static/img/yazilim.svg').default,
     description: (
       <>
-        C++ ile imkansız buldugum problemleri çözmeyi deniyorum. başaramıyorum.
+        C++ ile imkansiz buldugum problemleri çözmeyi deniyorum. başaramıyorum.
       </>
     ),
   },
