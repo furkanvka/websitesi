@@ -1,3 +1,9 @@
+---
+id: 2
+title: Sinir_aglarinin_gelişimi
+---
+
+
 # Yapay Sinir Ağlarının Gelişimi
 
 Yapay sinir ağları, zaman içinde daha derin ve karmaşık hale gelerek birçok alanda çığır açmıştır. Aşağıda, temel modellerin gelişim süreci özetlenmiştir.
@@ -16,3 +22,4 @@ MLP, birden fazla gizli katman içeren tam bağlantılı sinir ağıdır. 1980�
 
 ## Modern Modeller ve ChatGPT
 ChatGPT ve benzeri büyük dil modelleri, transformer mimarisi ile çalışır. GPT-3, 175 milyar parametreye sahip olup, yüzlerce katmandan oluşur. Özellikle doğal dil işleme (NLP) alanında devrim niteliğindedir.
+

@@ -1,6 +1,11 @@
+---
+id: 1
+title: Sinir_aglarinin_insasi
+---
 
-# Yapay Sinir Ağları Nedir ve Yapı taşları neleridr?
-İnsan beynindeki sinir hücrelerinden esinlenerek geliştirilen yapay sinir ağları, günümüzde görüntü tanıma, doğal dil işleme ve oyun yapay zekası gibi birçok alanda kullanılmaktadır. Peki, bu sistemler nasıl öğrenir ve çalışır?hadi temel yapı taşlarını tanıyarak başlayalım.
+# Yapay Sinir Ağları Nedir ?
+İnsan beynindeki sinir hücrelerinden esinlenerek geliştirilen yapay sinir ağları, günümüzde görüntü tanıma, doğal dil işleme ve oyun yapay zekası gibi birçok alanda kullanılmaktadır. Peki, bu sistemler nasıl öğrenir ve çalışır?
+
 
 ## Nöronlar (Neurons)
 Yapay sinir ağlarının temel yapı birimi olan nöronlar, bir katsayı (weight) ve bir ağırlığa (bias) sahip olan bir fonksiyona benzerler. Ancak, bir fonksiyondan farklı olarak birden fazla girdiye sahip olabilirler ve her girdi için farklı katsayılara sahip olabilirler. Ayrıca, bünyelerinde bir aktivasyon fonksiyonu bulunur. Aktivasyon fonksiyonunun ne olduğundan ileride bahsedeceğiz. Bir nöronun görselleştirilmiş matematiksel karşılığı:
@@ -40,14 +45,6 @@ f(x) =
 \end{cases}
 $$
 
-kod karşılıgı:
-```python
-def relu(x):
-    if x > 0:
-        return x
-    else:
-        return 0
-```
 
 ReLU, gradyan kaybolma problemini büyük ölçüde azaltır ve hesaplama açısından daha verimlidir. Ancak, negatif girdilerde gradyanın sıfır olması nedeniyle "ölü nöron" problemi ortaya çıkabilir.
 
@@ -71,23 +68,15 @@ $$
 \sigma(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}}
 $$
 
-kod karşilıgi:
-```python
-def softmax(x):
-    exp = np.exp(x)
-    seum = np.sum(exp)
-    return exp / seum
-```
 
 Bu fonksiyon, girdileri normalize ederek olasılık değerlerine dönüştürür ve toplamlarını 1 yapar.
 
 ![Aktivasyon fonksiyonları grafiği](aktivasyon.png)
 
-# Sinir Aglarının inşa edilmesi
+## Layerlar (katmanlar)
+
 
 İhtiyacımız olan temel bileşenlerin neler olduğunu öğrendik. Peki bu bileşenleri nasıl birleştireceğiz ve elde edeceğimiz şey neye benzeyecek? Bu soruları cevaplamak için ilk olarak layer kavramının ne olduğundan bahsetmeliyiz.
-
-## Layerlar (katmanlar)
 
 layerler içim üst üste gelmiş noronlar desek çokta sorun olmaz aynı alanda parelel olarak çalışan noron toplulukları denebilir kendileri için bir araya gerelerk neurol networkları oluşturular.katmanlar bulundukları yere göre üçe ayrılırlar:
 
@@ -101,6 +90,178 @@ layerler içim üst üste gelmiş noronlar desek çokta sorun olmaz aynı alanda
 "Katmanların ne olduğunu öğrendik. Şimdi bunu bilgisayarlara anlatırken, ağırlıkları matrisler halinde tutup, gelen input ile matris çarpımı yaparak bir sonraki katmana geçecek verileri elde edebiliyoruz. Bu matris, gelen input ile nöron sayısı kadar genişliğe sahip oluyor. Biasları da aynı şekilde bir matriste tutup gerekli matris toplaması ile sonraki katmana verilmesi gereken veri elde edebiliriz.Bu matrislerin transpozları kullanrak modele ters taraftan bakılabilir.Egitim sürecinde bu bakışın sebebini ele alacagız.
 
 ![Matris vektör çarpımı](matrixvector.png)
+
+# Yapay Sinir agların Egitimi
+
+bir agın nelerden oluştugunu ögrendik.Şimdi bu agın nasıl egitilecegini ögrenenecegiz bu süreçtebilmemiz gereken kavramları ögrenelim.
+
+## Loss foknsiyonu
+
+## Optimizasyon teknikleri
+
+Yapay sinir agları oluşturulduktan sonra sahip oldukları parametlereler veri setleri aracılıgı ile güncellenmesi gerekmetedir bu şüreçte bunu yaparken çeşitli optimizasyo tekmikleri kullanılmaktadır.bu bölümde en çok kullanılanlardan bahsedecegiz.
+
+### Gradient Descent (Gradyan İnişi)
+
+### Stochastic Gradient Descent (SGD)
+
+### Adam (Adaptive Moment Estimation)
+
+### RMSprop (Root Mean Square Propagation)
+
+### AdaGrad (Adaptive Gradient Algorithm)
+
+### Adadelta
+
+### Nesterov Accelerated Gradient (NAG)
+
+### Batch Normalization
+
+### Learning Rate Schedulers
+
+### Early Stopping (Erken Durdurma)
+
+### L2 ve L1 Regülasyonu (Ridge ve Lasso)
+
+## Backprognataion
+
+
+# Sinir aglarının Python ile inşa edlimesi
+
+ögrenmememiz gereken kavramları ögrendik şimdi bunu kodlama ile prtaige dökme zamanı burda mnist adlı el ile yazılmış sayıların oldugu popoüler bir veri setini kullanacagım.
+
+```python 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# ---------------------- VERİ YÜKLEME ----------------------
+testdata_pd = pd.read_csv('data/mnist_test.csv')
+traindata_pd = pd.read_csv('data/mnist_train.csv')
+
+traindata = traindata_pd.to_numpy(dtype=np.uint8)
+testdata = testdata_pd.to_numpy(dtype=np.uint8)
+
+testdata = testdata / 255.0
+traindata = traindata / 255.0
+
+# ---------------------- AKTİVASYONLAR ----------------------
+def relu(x):
+    return np.maximum(0, x)
+
+def relu_derivative(z):
+    return z > 0
+
+def softmax(x):
+    exp = np.exp(x - np.max(x))
+    return exp / np.sum(exp, axis=0)
+
+# ---------------------- ARAÇ FONKSİYONLAR ----------------------
+def one_hot(y, num_classes=10):
+    vec = np.zeros((num_classes, 1))
+    vec[y] = 1
+    return vec
+
+def random_value(data):
+    x = np.random.randint(0, data.shape[0])
+    return data[x, :]
+
+def show_image(data, predicted=None):
+    label = int(data[0] * 255)
+    img = data[1:].reshape(28, 28)
+    plt.imshow(img, cmap='gray')
+    title = f"Label: {label}"
+    if predicted is not None:
+        title += f" | Predicted: {predicted}"
+    plt.title(title)
+    plt.axis('off')
+    plt.show()
+
+# ---------------------- AĞ BAŞLATMA ----------------------
+def init_params():
+    w1 = np.random.rand(10, 784) - 0.5
+    b1 = np.random.rand(10, 1) - 0.5
+    w2 = np.random.rand(10, 10) - 0.5
+    b2 = np.random.rand(10, 1) - 0.5
+    return w1, b1, w2, b2
+
+# ---------------------- FORWARD PROPAGATION ----------------------
+def forward_prop(w1, b1, w2, b2, X):
+    z1 = w1 @ X + b1
+    a1 = relu(z1)
+    z2 = w2 @ a1 + b2
+    a2 = softmax(z2)
+    return z1, a1, z2, a2
+
+# ---------------------- BACKWARD PROPAGATION ----------------------
+def backward_prop(z1, a1, z2, a2, Y, X, w2):
+    y_true = one_hot(Y)
+    dz2 = a2 - y_true
+    dw2 = dz2 @ a1.T
+    db2 = dz2
+    dz1 = (w2.T @ dz2) * relu_derivative(z1)
+    dw1 = dz1 @ X.T
+    db1 = dz1
+    return dw1, db1, dw2, db2
+
+# ---------------------- EĞİTİM FONKSİYONU ----------------------
+def train(data, epochs, learning_rate):
+    w1, b1, w2, b2 = init_params()
+
+    for epoch in range(epochs):
+        np.random.shuffle(data)
+        total_loss = 0
+        correct = 0
+
+        for i in range(len(data)):
+            label = int(data[i, 0] * 255)
+            X = data[i, 1:].reshape(784, 1)
+
+            z1, a1, z2, a2 = forward_prop(w1, b1, w2, b2, X)
+
+            loss = -np.sum(one_hot(label) * np.log(a2 + 1e-8))
+            total_loss += loss
+
+            if np.argmax(a2) == label:
+                correct += 1
+
+            dw1, db1, dw2, db2 = backward_prop(z1, a1, z2, a2, label, X, w2)
+
+            w1 -= learning_rate * dw1
+            b1 -= learning_rate * db1
+            w2 -= learning_rate * dw2
+            b2 -= learning_rate * db2
+
+        acc = correct / len(data)
+        print(f"Epoch {epoch+1}/{epochs} - Loss: {total_loss:.4f} - Accuracy: {acc:.4f}")
+
+    return w1, b1, w2, b2
+
+
+# ---------------------- ANA DÖNGÜ ----------------------
+# Eğitim
+w1, b1, w2, b2 = train(traindata[:4000], epochs=10, learning_rate=0.01)
+
+# Etkileşimli tahmin ve gösterim
+while True:
+    sample = random_value(testdata)
+    label = int(sample[0] * 255)
+    X = sample[1:].reshape(784, 1)
+
+    _, _, _, a2 = forward_prop(w1, b1, w2, b2, X)
+    prediction = np.argmax(a2)
+
+    show_image(sample, predicted=prediction)
+    print(f"Gerçek Etiket: {label} | Tahmin: {prediction}")
+
+    x = input("Devam etmek için Enter, çıkmak için 'q': ")
+    if x.lower() == "q":
+        break
+
+```
+
+
+
 
 ## Sinir Ağı Tipleri ve kullanım alanları
 
