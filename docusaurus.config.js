@@ -68,10 +68,11 @@ const config = {
     ({
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Benim Sitem',
+        title: 'Furkan Vural',
         logo: {
           alt: 'Logo',
-          src: 'img/logo.png',
+          src: 'img/logo-light.png',      // Açık tema için
+          srcDark: 'img/logo-dark.png',   // Koyu tema için
         },
         items: [
           {
