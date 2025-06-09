@@ -46,16 +46,6 @@ const config = {
           remarkPlugins: [require('remark-math')],
           rehypePlugins: [require('rehype-katex')],
        },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -88,10 +78,11 @@ const config = {
             label: 'Yapay Zeka',
           },
           {
-            to: '/blog',
-            label: 'Blog',
+            type: 'docSidebar',
+            sidebarId: 'programlamaSidebar',
             position: 'left',
-          },
+            label: 'Programlama',
+          }
         ],
       },
       footer: {
@@ -107,6 +98,10 @@ const config = {
                 label: 'Yapay Zeka',
                 to: '/docs/yapayzeka/giris',
               },
+              {
+                label: 'Programlama',
+                to: '/docs/programlama/go',
+              },
             ],
           },
           {
@@ -121,10 +116,6 @@ const config = {
           {
             title: 'Diğer',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/furkanvka',
