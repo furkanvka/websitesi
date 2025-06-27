@@ -82,6 +82,12 @@ const config = {
             sidebarId: 'programlamaSidebar',
             position: 'left',
             label: 'Programlama',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'ArastirmaSidebar',
+            position: 'left',
+            label: 'arastirma',
           }
         ],
       },
@@ -101,6 +107,10 @@ const config = {
               {
                 label: 'Programlama',
                 to: '/docs/programlama/go',
+              },
+              {
+                label: 'Programlama',
+                to: '/docs/araştırma/giris',
               },
             ],
           },
