@@ -1,6 +1,6 @@
 ---
 id: 1
-title: Sinir_aglarinin_insasi
+title: Sinir_aglarinin_nedir ?
 ---
 
 # Yapay Sinir Ağları Nedir ?
@@ -91,39 +91,88 @@ layerler içim üst üste gelmiş noronlar desek çokta sorun olmaz aynı alanda
 
 ![Matris vektör çarpımı](matrixvector.png)
 
-# Yapay Sinir agların Egitimi
+Tabii, sana **yapay sinir ağlarının eğitimi** konusunu bu başlıklar altında temel ve anlaşılır şekilde anlatayım:
 
-bir agın nelerden oluştugunu ögrendik.Şimdi bu agın nasıl egitilecegini ögrenenecegiz bu süreçtebilmemiz gereken kavramları ögrenelim.
+# Yapay Sinir Ağlarının Eğitimi
 
-## Loss foknsiyonu
+Bir yapay sinir ağı; **katmanlar, nöronlar, ağırlıklar ve aktivasyon fonksiyonlarından** oluşur.
+Ancak ağı oluşturmak yetmez — bu ağı **belirli bir problemi çözmesi için eğitmemiz gerekir**.
+Bu süreçte iki önemli temel kavram vardır:
 
-## Optimizasyon teknikleri
 
-Yapay sinir agları oluşturulduktan sonra sahip oldukları parametlereler veri setleri aracılıgı ile güncellenmesi gerekmetedir bu şüreçte bunu yaparken çeşitli optimizasyo tekmikleri kullanılmaktadır.bu bölümde en çok kullanılanlardan bahsedecegiz.
+## Loss Fonksiyonu (Kayıp Fonksiyonu)
 
-### Gradient Descent (Gradyan İnişi)
+* Loss fonksiyonu (ya da cost function), **ağın tahmin ettiği sonuç ile gerçek (beklenen) sonuç arasındaki farkı** sayısal olarak ifade eder.
+* Yani, “ağ ne kadar hata yapıyor?” sorusuna cevap verir.
+* Örneğin:
 
-### Stochastic Gradient Descent (SGD)
+  * Regresyonda genellikle **Mean Squared Error (MSE)** kullanılır:
 
-### Adam (Adaptive Moment Estimation)
+    $$
+    L = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2
+    $$
+  * Sınıflandırmada genellikle **Cross Entropy Loss** kullanılır.
 
-### RMSprop (Root Mean Square Propagation)
+- Eğitim boyunca hedefimiz bu loss fonksiyonunu **minimuma indirmektir**.
 
-### AdaGrad (Adaptive Gradient Algorithm)
+## Optimizasyon
 
-### Adadelta
+* Optimizasyon, **loss fonksiyonunu minimize edecek şekilde ağın ağırlıklarını güncelleme** sürecidir.
+* En çok kullanılan algoritma **Gradient Descent (Gradyan İnişi)**:
 
-### Nesterov Accelerated Gradient (NAG)
+  * Loss fonksiyonunun ağırlıklar (parametreler) üzerindeki türevini (gradyanını) hesaplar.
+  * Bu türev, loss’un nasıl değiştiğini gösterir.
+  * Ağırlıkları bu gradyanın ters yönünde güncelleriz ki loss azalsın:
 
-### Batch Normalization
+    $$
+    w_{new} = w_{old} - \eta \cdot \frac{\partial L}{\partial w}
+    $$
 
-### Learning Rate Schedulers
+    burada
 
-### Early Stopping (Erken Durdurma)
+    * \$\eta\$: learning rate (öğrenme oranı)
+* Daha gelişmiş optimizer’lar:
 
-### L2 ve L1 Regülasyonu (Ridge ve Lasso)
+  * **Momentum, RMSProp, Adam** gibi algoritmalar bu güncellemeyi daha hızlı ve stabil hale getirir.
 
-## Backprognataion
+
+## Backpropagation (Geri Yayılım) Nedir?
+
+Backpropagation (geri yayılım), **yapay sinir ağlarını eğitmek için kullanılan temel algoritmadır**.  
+Ağ çıktısı ile gerçek değer arasındaki hatayı hesapladıktan sonra bu hatanın **ağın ağırlıklarını nasıl değiştirmesi gerektiğini** belirler.
+
+### Nasıl Çalışır?
+
+Backpropagation iki temel aşamadan oluşur:
+
+**İleri Yayılım (Forward Pass)**  
+   - Girdiler ağdan geçirilir ve her katmandaki ağırlıklar ile aktivasyon fonksiyonları yardımıyla çıktıya ulaşılır.
+   - Bu sayede tahmin edilen $\hat{y}$ bulunur.
+
+**Geri Yayılım (Backward Pass)**  
+   - Çıktıda hesaplanan **loss (kayıp)** değerine bakarak her katmandaki ağırlıkların bu hataya katkısını bulur.
+   - **Zincir kuralı (chain rule)** kullanılarak loss’un ağırlıklara göre türevleri hesaplanır.
+   - Böylece her ağırlığın ne kadar değiştirilmesi gerektiği (gradyan) ortaya çıkar.
+
+
+### Matematiksel Özet
+
+Örnek bir ağda bir ağırlık $w$ için güncelleme şu şekilde olur:
+
+1. Loss fonksiyonunun türevi (gradyan) bulunur:
+
+$$
+\frac{\partial L}{\partial w}
+$$
+
+2. Bu türev, learning rate $\eta$ ile çarpılır ve ağırlık güncellenir:
+
+$$
+w_{new} = w_{old} - \eta \cdot \frac{\partial L}{\partial w}
+$$
+
+bu konudaki iyi bir açıklama için 3blue1brown calculus videolarına bakılabilir.
+
 
 
 # Sinir aglarının Python ile inşa edlimesi
@@ -259,9 +308,6 @@ while True:
         break
 
 ```
-
-
-
 
 ## Sinir Ağı Tipleri ve kullanım alanları
 
