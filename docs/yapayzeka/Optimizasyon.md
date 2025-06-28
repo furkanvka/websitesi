@@ -2,7 +2,7 @@
 
 Optimizasyon, bir fonksiyonun verilen veriler eşliginde inputlara istenen yönde tepki vermesi için fonksiyonun parametrelerinin güncellenmesi sürecidir.
 
-yapay sinir aglarıda bu 
+yapay sinir aglarıda bu d
 
 
 ### Gradient Descent (Gradyan İnişi)

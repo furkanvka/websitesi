@@ -1,3 +1,8 @@
+---
+id: 12
+title: Rnn
+---
+
 # Recurrent Neural Networks
 
 https://www.youtube.com/watch?v=AsNTP8Kwu80&t=253s bu abi çok iyi
@@ -11,7 +16,8 @@ bir feedforward (ileri beslemeli) ağa sunduğunuzda, çıktılar birbirinden ba
 $$
 y_0 = F_\theta(x_0) \\
 y_1 = F_\theta(x_1) \\
-\ldots \\
+
+
 y_t = F_\theta(x_t)
 $$
 
@@ -31,7 +37,7 @@ bu işelmin getirdigi  iki kritik problem bulunmaktadır :
 
 RNN’lerin en önemli avantajı, her gizli durumun bir önceki duruma bağlı olması sayesinde **bilgiyi zaman boyunca taşıyabilmesidir**.
 
-Bu sayede RNN’ler yalnızca mevcut input’a değil, aynı zamanda **dolaylı olarak \$h\_{t-1}\$’da kodlanmış geçmiş input’lara** da bakarak tahmin yapabilir.
+Bu sayede RNN’ler yalnızca mevcut input’a değil, aynı zamanda **dolaylı olarak $h\_{t-1}$’da kodlanmış geçmiş input’lara** da bakarak tahmin yapabilir.
 
 Bu özellik RNN’leri şu tip problemler için çok uygun hale getirir:
 
@@ -45,8 +51,6 @@ Bu özellik RNN’leri şu tip problemler için çok uygun hale getirir:
 
 Normal sinir ağlarında olduğu gibi RNN’ler de **backpropagation** ile eğitilir.
 Fakat burada ağırlıklar **zaman boyunca tekrar tekrar kullanıldığı** için, özel bir versiyon kullanılır:
-
-> **Backpropagation Through Time (BPTT)**
 
 ### Nasıl çalışır?
 
