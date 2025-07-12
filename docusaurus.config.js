@@ -94,27 +94,6 @@ const config = {
       footer: {
         links: [
           {
-            title: 'Notlar',
-            items: [
-              {
-                label: 'Gömülü Sistemler',
-                to: '/docs/gömülü/giris',
-              },
-              {
-                label: 'Yapay Zeka',
-                to: '/docs/yapayzeka/giris',
-              },
-              {
-                label: 'Programlama',
-                to: '/docs/programlama/go',
-              },
-              {
-                label: 'Programlama',
-                to: '/docs/araştırma/giris',
-              },
-            ],
-          },
-          {
             title: 'Topluluk',
             items: [
               {
