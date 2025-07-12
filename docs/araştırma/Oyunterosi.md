@@ -14,6 +14,9 @@ title: Oyun teorisi
 - Dillemma oyunu için kesinlike testifies şeçenegini şeçerdim .
 **29.06.2025**
 
+- Vİdoo serisi hoş ama bir miktar bilgisayar bilimci oldugumu unttum galiba .
+**8.07.2025**
+
 
 ## İçindekiler
 
@@ -23,15 +26,6 @@ title: Oyun teorisi
 
 
 ## 1. 🧩 Giriş ve Temel Kavramlar
-
-### 📌 Konular:
-- Oyuncu, strateji, ödül (payoff)
-- Oyun tipleri: Kooperatif / Kooperatif olmayan, sıfır toplamlı, eş zamanlı / sıralı
-- Normal Form (Tablo) ve Extensive Form (Ağaç) oyun tanımları
-- Terimler Sözlüğü
-- Oyun Tipleri
-- Örnek Basit Oyunlar (Taş-Kağıt-Makas, Koordinasyon Oyunu)
-
 
 ## Oyunun Parçaları
 
@@ -53,12 +47,15 @@ oyun teorisi hakkında temel kavramları ögrenmeden önce basit bir oyun incele
 - payofflar çok çeşitli olalablir. mesela yale videosunda bahsettigi oyunda toplulugun faydasını düşünmek veya kendi faydamızı öncelemek gibi iki temel payofftan bahsediliyor bunlar tamamıyla oyuncunun yapacagı şecimi belirliyor.
 
 ---
+
 ### Stratejiler
 
 Strateji genel olarak ne oldugu bilinen bir kavram burda ilerde işime yarayacak iki tür streji ögrensek yeterli.bunlar :
 
 - **Strictly Dominant Strategy** : Oyuncu, rakiplerinin hangi stratejiyi seçtiğinden bağımsız olarak, bu stratejiyi seçerse daha iyi payoff alır.
 - **Strictly Dominated Strategy** Oyuncu, ne olursa olsun başka bir strateji o stratejiden daha iyi payoff sağlar.
+
+bu konuda şunu bilmeyiliyiz oyun teorisi her zaman Strictly Dominated Strategy uzakd durmamız gerektigini söyler.
 
 --- 
 
