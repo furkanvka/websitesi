@@ -1,9 +1,9 @@
 ---
 id: 5
-title: Optimizasyon
+title: Optimizasyon nedir
 ---
 
-# Optimizasyon
+# Optimizasyon Nedir
 
 ## Optimizasyon Nedir
 
@@ -117,10 +117,5 @@ Optimizasyon algoritmalarında iterasyonların ne zaman duracağını belirlemek
 * **Rastgele Yeniden Başlatma:** Farklı başlangıç noktalarından algoritmayı tekrar çalıştırmak.
 * **Türevsiz Teknikler:** Genetik algoritmalar, tavlama benzetimi gibi yöntemler, daha geniş bir arama yaparak yerel minimumlara takılma riskini azaltır.
 
-
-
-
-## kaynakça
-
-- Mfa hocamızın notları
-- https://medium.com/@habicoban/steepest-descent-algoritmas%C4%B1-fonksiyon-optimizasyonunda-bir-ad%C4%B1m-%C3%B6ne-ge%C3%A7mek-aac7bc58d4d0
+---
+Kaynakçayı optimzasyon teknikleritektek analıtmı bir sonraki kısımda
