@@ -1,5 +1,6 @@
-Tabii! Yazını mümkün olduğunca **senin ifadelerini koruyarak**, sadece **imla, noktalama, Türkçe ifade ve tekrarları düzelterek** yeniden düzenledim. Gereksiz tekrarları çıkardım, cümle yapısını daha okunaklı hale getirdim.
-
+---
+id: 5
+title: Optimizasyon
 ---
 
 # Optimizasyon
