@@ -54,7 +54,7 @@ $$
 
 Burada $\epsilon$, genellikle $\frac{d}{d\epsilon} f(z(\epsilon)) = 0$ çözülerek hesaplanır.
 
----
+Diyelim ki bir tepenin eteklerindeyiz ve ne kadar ilerlememiz gerektigini hesaplalmız gerekiyorTepedeki eğim sana hangi yöne gitmen gerektiğini söyler (gradient yönü).Ama ne kadar uzağa gitmen gerektiğini seçmek için, adımını büyütüp küçülttüğünde yolda ne kadar aşağı indiğine bakarsın.En çok aşağı indiğin adım uzunluğunda durursun.Matematikte bu, fonksiyonun adım uzunluğuna göre türevini alıp sıfıra eşitlemekle aynı şeydir.
 
 #### Örnek 1: $f(x) = x^4$
 
@@ -69,21 +69,35 @@ Yine başlangıçtan bağımsız olarak tek adımda minimuma ulaşılır.
 
 ---
 
-#### Örnek 2: 2 boyutlu — $f(x_1,x_2)=x_1^2+3x_2^2$
+#### Örnek 1: 2 boyutlu — $f(x_1,x_2)=x_1^2+3x_2^2$
 
-* Gradyan:
+- Gradyan:
 
 $$
 \nabla f = \begin{bmatrix} 2x_1 \\ 6x_2 \end{bmatrix}
 $$
 
-* Arama yönü:
+- Arama yönü:
+
+$$
+X_{\text{yeni}} = X - t \nabla f
+= \begin{bmatrix}
+x_1 - 2 t x_1 \\
+x_2 - 6 t x_2
+\end{bmatrix}
+= \begin{bmatrix}
+x_1 (1 - 2t) \\
+x_2 (1 - 6t)
+\end{bmatrix}
+$$
 
 $$
 z(t) = \begin{bmatrix} x_1(1-2t) \\ x_2(1-6t) \end{bmatrix}
 $$
 
-* Line search sonucunda optimal $t$:
+- Line search sonucunda optimal $t$:
+
+
 
 $$
 t = \frac{x_1^2 + 9x_2^2}{2x_1^2 + 54x_2^2}
@@ -97,9 +111,76 @@ $$
 
 ---
 
-#### Arama Yönünün Dikeyliği
+### Aradaki farkı görmek python
 
-En dik iniş yönteminde, her yeni arama yönü bir önceki yöne dik olur. Bu algoritmanın ilerleyişini karakterize eden önemli bir özelliktir.
+
+
+```python 
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Fonksiyon ve gradient
+def f(x):
+    return (x[0] - 3)**2 + (x[1] + 1)**2
+
+def grad_f(x):
+    return np.array([2*(x[0] - 3), 2*(x[1] + 1)])
+
+# Gradient descent sabit adımla
+def gradient_descent_step(x, eta):
+    return x - eta * grad_f(x)
+
+# Steepest descent line search ile
+def steepest_descent_step(x):
+    d = -grad_f(x)
+    # line search: burada minimize edilecek fonksiyon
+    phi = lambda alpha: f(x + alpha * d)
+    # çok kaba bir search
+    alphas = np.linspace(0, 1, 100)
+    phi_values = [phi(a) for a in alphas]
+    best_alpha = alphas[np.argmin(phi_values)]
+    return x + best_alpha * d
+
+# Başlangıç noktası
+x0 = np.array([0.0, 0.0])
+
+# İterasyonlar
+steps = 20
+eta = 0.1
+
+gd_points = [x0]
+sd_points = [x0]
+
+x_gd = x0.copy()
+x_sd = x0.copy()
+
+for i in range(steps):
+    x_gd = gradient_descent_step(x_gd, eta)
+    x_sd = steepest_descent_step(x_sd)
+    gd_points.append(x_gd)
+    sd_points.append(x_sd)
+
+gd_points = np.array(gd_points)
+sd_points = np.array(sd_points)
+
+# Plot
+plt.figure(figsize=(8,6))
+X, Y = np.meshgrid(np.linspace(-1,5,100), np.linspace(-3,2,100))
+Z = (X - 3)**2 + (Y + 1)**2
+plt.contour(X, Y, Z, levels=30)
+
+plt.plot(gd_points[:,0], gd_points[:,1], 'o-', label='Gradient Descent (sabit adım)')
+plt.plot(sd_points[:,0], sd_points[:,1], 's-', label='Steepest Descent (line search)')
+
+plt.plot(3, -1, 'rx', markersize=12, label='Minimum')
+
+plt.legend()
+plt.title('Gradient Descent vs Steepest Descent')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.grid(True)
+plt.show()
+```
 
 ---
 
@@ -123,7 +204,6 @@ f(1.0002) \approx 1 + 0.0002 \cdot 50 = 1.01
 $$
 
 ---
-
 ### Örnek 2: $f(x)=\ln x$
 
 * $x$ 1'e yakınsa:
