@@ -30,8 +30,6 @@ Adım adım bur süreci anlatmamız gerekeirse:
 ![asd](gradiant.webp)
 
 
-
-
 **Steepest descent**, genellikle, öğrenme oranı $\eta$'nın her adımda negatif gradyan yönünde maksimum kazanç sağlayacak şekilde seçildiği gradient descent türü olarak tanımlanır.
 Bu $\eta$'nın (adım büyüklüğünün) her iterasyonda nasıl belirleneceğini araştıran kısma **line search** denir.
 
@@ -112,8 +110,6 @@ $$
 ---
 
 ### Aradaki farkı görmek python
-
-
 
 ```python 
 import numpy as np
@@ -202,8 +198,6 @@ $$
 $$
 f(1.0002) \approx 1 + 0.0002 \cdot 50 = 1.01
 $$
-
----
 ### Örnek 2: $f(x)=\ln x$
 
 * $x$ 1'e yakınsa:
@@ -218,8 +212,6 @@ $$
 \ln x \approx \ln 2 + \frac{x-2}{2}
 $$
 
----
-
 ### Daha iyi yaklaşım için Taylor serisi
 
 Daha yüksek dereceden serilerle daha doğru sonuçlar elde edilir:
@@ -232,7 +224,6 @@ $$
 
 Bir fonksiyonun köklerini ($f(x)=0$) veya ekstremumlarını ($f'(x)=0$) bulmak için kullanılan iteratif bir yöntemdir.
 
----
 
 ### 1. Dereceden (Kök Bulma)
 
@@ -248,15 +239,12 @@ $$
 
 $x_0=1$ ile başlayınca birkaç adımda $\approx 1.41421$.
 
----
-
 ### 2. Dereceden (Minimum/Maksimum Bulma)
 
 $$
 x_{n+1} = x_n - \frac{f'(x_n)}{f''(x_n)}
 $$
 
----
 
 ### Karşılaştırma
 
@@ -269,11 +257,182 @@ $$
 
 Örneğin, $f(x)=x^3-2x+2$ için yanlış başlangıç noktaları yöntemin döngüye girmesine yol açabilir.
 
+Tabii! İşte o yazının sonuna, adım adım çalışma açıklamasını eklenmiş hali:
+
 ---
+
+## Levenberg-Marquardt (LM) algoritması
+
+Levenberg-Marquardt algoritması, doğrusal olmayan problemlerin karesal hata formülleri ile optimizasyonu için kullanılır.
+
+Gradient descent ile Gauss-Newton yönteminin bir kombinasyonu gibidir.
+
+### ⚙ Algoritmanın Çekirdeği
+
+Her iterasyonda $x$ için şu lineer sistem çözülür:
+
+$$
+\bigl( J^T J + \lambda I \bigr) \delta = - J^T r
+$$
+
+* $J = \frac{\partial r}{\partial x}$: Jacobian matrisi ($m \times n$)
+* $\lambda > 0$: damping parametresi
+* $I$: birim matris
+
+Yeni parametre:
+
+$$
+x_{\text{new}} = x + \delta
+$$
+
+### ⚖ Gauss-Newton & Gradient Descent Köprüsü
+
+* Küçük $\lambda$ → **Gauss-Newton gibi davranır** (hızlı, ama kararsız olabilir).
+* Büyük $\lambda$ → **gradient descent gibi davranır** (daha yavaş, ama daha güvenli).
+
+### 🔄 Adaptif $\lambda$
+
+* Eğer adım **başarılı** (yani hata azalıyor) ise $\lambda$ **küçültülür** → Gauss-Newton’a yaklaşır.
+* Eğer adım **başarısız** (hata artıyor) ise $\lambda$ **büyütülür** → gradient descent’e yaklaşır.
+
+---
+
+### 🚀 Algoritmanın Adım Adım İşleyişi
+
+1. **Başlangıç**
+
+   * Başlangıç parametresi $x_0$ ve damping katsayısı $\lambda_0$ seçilir.
+   * Bir büyütme oranı $\nu > 1$ (ör. 10) belirlenir.
+
+2. **Her iterasyonda:**
+
+   * **Residual vektörü ve Jacobian hesaplanır:**
+
+     $$
+     r(x) = \begin{bmatrix} r_1(x) \\ \vdots \\ r_m(x) \end{bmatrix}, 
+     \quad 
+     J = \frac{\partial r}{\partial x}
+     $$
+   * **Lineer sistem çözülür:**
+
+     $$
+     \bigl(J^T J + \lambda I\bigr) \delta = - J^T r
+     $$
+   * **Yeni parametre adayı hesaplanır:**
+
+     $$
+     x_{\text{new}} = x + \delta
+     $$
+
+3. **Hata kontrol edilir:**
+
+   * Yeni hata $E(x_{\text{new}}) = \frac12 \|r(x_{\text{new}})\|^2$ hesaplanır.
+   * Eğer $E(x_{\text{new}}) < E(x)$:
+
+     * $x$ güncellenir: $x \leftarrow x_{\text{new}}$
+     * $\lambda$ azaltılır: $\lambda \leftarrow \lambda / \nu$
+   * Aksi halde:
+
+     * Adım reddedilir (eski $x$ korunur)
+     * $\lambda$ artırılır: $\lambda \leftarrow \lambda \cdot \nu$
+
+4. **Yakınsama kontrol edilir:**
+
+   * $\|\delta\|$ çok küçükse veya hata yeterince azalmışsa algoritma durur.
+
+
+```python
+import numpy as np
+from scipy.optimize import least_squares
+
+# Model fonksiyonu
+def model(x, t):
+    return x[0] * np.exp(-x[1] * t) + x[2]
+
+# Residual (hata) fonksiyonu
+def residuals(x, t, y):
+    return y - model(x, t)
+
+# Örnek veri
+t_data = np.linspace(0, 5, 50)
+y_data = 2 * np.exp(-1.3 * t_data) + 0.5 + 0.1*np.random.randn(len(t_data))
+
+# Başlangıç tahmini
+x0 = [1, 1, 1]
+
+# LM optimizasyon
+result = least_squares(residuals, x0, args=(t_data, y_data), method='lm')
+
+print("Bulunan parametreler:", result.x)
+```
+
+bu video çok iyi :
+https://www.youtube.com/watch?v=UQsOyMj9lnI&t=19s
+
+## BFGS
+
+Çok gelişmiş bir optimzasyon algoritması öptimizasyon kütüphanelerindeki min() funk arkasında çalışan genel algoritmadır kendisi .Bir quasi-Newton yöntemi olarak geçer. quasi newron yönteminin nasıl çalıştıgından bahsedelim ilk:
+
+- Newton yöntemindeki gibi H^-1 ∇f(x) (H = Hessian) kullanmak isteriz.
+
+- Ama Hessian matrisini (∇²f) doğrudan hesaplamak maliyetli ve bazen mümkün değil.
+
+- Bunun yerine iterasyonlarda Hessian (ya da onun tersi) için yaklaşık bir matris B veya H tutulur ve her adımda güncellenir.
+
+bfgs algoritması bunu belli bir prensipte gerçekleştiri bunun nasıl çalıştıhını anlamak için adım adım inceleleyelim
+
+### 🔍 BFGS algoritmasının adımları
+
+Kısaca:
+
+1. Başlangıç tahmini:
+
+   * `x_0` (başlangıç noktası)
+   * `H_0 = I` (ters Hessian yaklaşık matrisi genelde birim matris ile başlatılır).
+
+2. Her iterasyonda:
+
+   * Gradient hesaplanır: `g_k = ∇f(x_k)`
+   * Adım yönü hesaplanır:
+
+     ```
+     p_k = - H_k * g_k
+     ```
+   * Uygun adım büyüklüğü (line search) ile `α_k` bulunur.
+   * Yeni nokta:
+
+     ```
+     x_{k+1} = x_k + α_k * p_k
+     ```
+   * Gradient farkı:
+
+     ```
+     y_k = ∇f(x_{k+1}) - ∇f(x_k)
+     ```
+   * Nokta farkı:
+
+     ```
+     s_k = x_{k+1} - x_k
+     ```
+   * `H_k` güncellenir:
+
+     ```
+     ρ_k = 1 / (y_kᵗ s_k)
+     V_k = (I - ρ_k s_k y_kᵗ)
+     H_{k+1} = V_k H_k V_kᵗ + ρ_k s_k s_kᵗ
+     ```
+
+     (Bu formul **BFGS update formülü** olarak bilinir.)
+
+3. Kriter sağlanmazsa (`||∇f||` küçük değilse) bir sonraki iterasyona geçilir.
+
 
 ## Kaynakça
 
-- Mfa hocamızın notları
+- https://www.youtube.com/watch?v=QGFct_3HMzk
+- https://www.mit.edu/~hlb/StantonGrant/Lecture9/quadratic.pdf
+- https://www.youtube.com/watch?v=VIoWzHlz7k8
+- https://www.youtube.com/watch?v=UQsOyMj9lnI&t=19s
 - [Medium — Steepest Descent](https://medium.com/@habicoban/steepest-descent-algoritmas%C4%B1-fonksiyon-optimizasyonunda-bir-ad%C4%B1m-%C3%B6ne-ge%C3%A7mek-aac7bc58d4d0)
 - https://medium.com/data-science/linear-regression-using-gradient-descent-97a6c8700931
 
