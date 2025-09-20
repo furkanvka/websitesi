@@ -5,13 +5,17 @@ title: Java ile nesneye yönelik programlama
 
 ## 1. Temel Giriş bilgileri
 
-### Java ve Opp Nedir Bunlar?
+### 1.1 Java ve Opp Nedir Bunlar?
 
 ilk olarak nesneye yönelik proglamlama nedir? basitçe kod yazarken yaklaşım olarak kodu tekrar kullanılablir bir hiyaraşiye sokulabilir halde parçaçıklar (nesneler) halinde yazılması yaklaşıma ad olarak verilir.Sürdüreleblir ve tekrar kullanalabilirlik açısından Çogu projede sıklıkla karşımıza çıkmaktadır.
 
 Peki Java ne , java ise bu yaklaşımı temele alarak geliştirilmiş popüler bir yazılım dilidir.Çoklu plotform destegi hızı ile günümüzdeki çogu uygulamın altında varlıgını sürdürmektedir.
 
-### Java Compile Süreci
+Nesneye yönelik programlamayı icad eden alan keyden
+
+https://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en
+
+### 1.2 Java Compile Süreci
 
 Java bildigimiz diller gibi derlenmez direk spesifik olarka cihaza değil java standartalrna göre makine koduna çevrilir.bu sayede farklı cihazlar üzerinde Java Virtual Machine (jvm) ortamında çalıştıralbabilir.Bu java’nın en önemli özelliği Write Once, Run Anywhere yaklaşım gerçeklemesidir.Bu şüece yakından bakalım:
 
@@ -32,7 +36,7 @@ Java bildigimiz diller gibi derlenmez direk spesifik olarka cihaza değil java s
    java  [.class dosyasının adı]
    ```
 
-### Java temel syntax yapısı
+### 1.3 Java temel syntax yapısı
 
 Dosyalarımızı nasıl compile edicegimizi ögrendik peki dosyalrmızın içerigi nasıl hadi bakalım:
 
