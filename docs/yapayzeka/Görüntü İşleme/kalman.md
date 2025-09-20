@@ -63,9 +63,6 @@ Bu mekanizma, Kalman filtresinin sadece bir veri düzleştirme aracı olmadığ�
 
 ## Kalman Filresinin Matematiksel Alt Tabanı
 
-
-
-
 Bir sistem genel olarak şu şekilde ifade edilir:
 
 * **Durum Denklemi (State Equation):**
@@ -156,4 +153,6 @@ $$
 https://medium.com/@syndrome/kalman-filter-nedir-51c38a12c423
 
 https://en.wikipedia.org/wiki/Kalman_filter
+
+https://www.youtube.com/watch?v=HCd-leV8OkU
 
