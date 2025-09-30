@@ -423,7 +423,6 @@ public class Kedi extends Hayvan {
 
 ### 5.5 Multiple Inheritance
 
-
 ## 6. Sınıf ilişkeleri
 
 Bu kısımda sınıflar arası olan temel ilişkilerden bahsedecegiz.Generalization(inharitnce) , Polymorphism , absractiondan ve Interface ayrı kısımlarda bahsettigimiz için bu kısımda onlarla ilhili bir şey oamayacak.
@@ -531,51 +530,219 @@ class Library {
 
 ![uml-Composition](composition.webp)
 
-
 ## 7. Polymorphism (Çok Biçimlilik)
+
+Polymorphism üst bir sınıfın referansınınn projedeki bütün diger sınıf nesnelerini tutabilmesidir.Daha somut bir örnek bir vermek gerekirse bir manavda muz elma gibi şeylerin hepsinin aslında birer meyve olması mantıgı düşünülenebilir.B,uradaki avantaj, bir işlemi gerçekleştirirken hangi sınıfa ait nesne ile işlem gerçekleştirdiğimizi bilmemize gerek kalmamasıdır.Bunu saglamak için Method Overloading , Method Overriding yöntemlerini kullanırız.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        
+        User user = new PremiumUser();
+        //Ya da 
+        User user2;
+        PremiumUser premiumUser = new PremiumUser();
+        user2 = premiumUser;
+    } 
+}
+```
 
 ### 7.1 Method Overloading (Metot Aşırı Yükleme)
 
+Aynı isimli metodun farklı parametrelerle tanımlanmasıdır.
+- Dönüş tipi değişebilir.
+- Parametre sayısı veya tipi değişirse geçerli olur.
+- Compile-time (derleme zamanı) polymorphism’tir.
+    
+```java
+class HesapMakinesi {
+    // toplama işlemi - int
+    int topla(int a, int b) {
+        return a + b;
+    }
+
+    // toplama işlemi - double
+    double topla(double a, double b) {
+        return a + b;
+    }
+
+    // toplama işlemi - 3 parametre
+    int topla(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HesapMakinesi h = new HesapMakinesi();
+        System.out.println(h.topla(2, 3));        // int versiyon
+        System.out.println(h.topla(2.5, 3.7));    // double versiyon
+        System.out.println(h.topla(1, 2, 3));     // 3 parametre
+    }
+}
+```
+
+
 ### 7.2 Method Overriding (Metot Ezme)
 
-### 7.3 @Override Kullanımı
+Bir alt sınıfın, üst sınıfındaki metodu aynı imza ile yeniden yazmasıdır.bunu belirmek için @override kelimesi kullanılır.Override kelimesi bize override etmedigimiz zaman uyarıda verir daha atasız kod yazmamaızda yardımcı olur.
 
-### 7.4 Dynamic Polymorphism Örneği (Üst Sınıf Referansı, Alt Sınıf Nesnesi)
+- Parametreler ve dönüş tipi aynı olmalıdır.
+- Alt sınıf, üst sınıfın metodunu “ezerek” kendi davranışını ekler.
+- Run-time (çalışma zamanı) polymorphism’tir.
+
+```java
+class Hayvan {
+    void sesCikar() {
+        System.out.println("Hayvan ses çıkarıyor...");
+    }
+}
+
+class Kedi extends Hayvan {
+    @Override
+    void sesCikar() {
+        System.out.println("Miyav!");
+    }
+}
+
+class Kopek extends Hayvan {
+    @Override
+    void sesCikar() {
+        System.out.println("Hav hav!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Hayvan h1 = new Kedi();
+        Hayvan h2 = new Kopek();
+
+        h1.sesCikar(); // "Miyav!"
+        h2.sesCikar(); // "Hav hav!"
+    }
+}
+```
 
 ## 8. Abstraction (Soyutlama)
 
-### 8.1 Abstract Class
-UML Abstract Class Diagram → sınıf adı italik yazılır
+Abstract bir sınıfın methodlarının detaylarının gizlenerek sunulması prensibidir.fonksiyonalrın defanitonları gibi düşünülenebilir.
 
-Gövdesiz metot UML’de italik metot olarak gösterilir
+### 8.1 Abstract Class
+
+Javada Soyutlama abstract anahtar kelimesi aracılığı ile yapılır.Abstract sınıfından inheritince yapılarak gerçek sınıf oluşturulur orda methodların declarasyonu yapılır.UMLde Abstract sınıfın adı italik yazılır
+
 ### 8.1.1 abstract Sınıf/Metot Tanımlama
 
-### 8.1.2 Gövdesiz Metot → Alt Sınıfta Zorunlu
 
-### 8.1.3 Gövdeli + Gövdesiz Metot Beraber
+```java 
+abstract class Shape {
+    // Abstract method: only a declaration (signature), no body.
+    // The implementing (sub) class must provide the definition (body).
+    abstract void draw();
+
+    // Concrete method: has a body and implementation.
+    void describe() {
+        System.out.println("This is a generic shape.");
+    }
+}
+```
+### 8.1.2 Gövdesiz Metot zorunlulugu
+
+Bir abstract sınıfan inherit edilen method bütün gövdesiz methodları implamente etmelidir.Gövdesiz methodlar italik yazılır.
+
+```java 
+class Circle extends Shape {
+    @Override
+    void draw() {
+        System.out.println("Drawing a Circle.");
+    }
+}
+```
 
 ### 8.1.4 abstract Sınıftan Nesne Oluşturulamaz
 
-## 8.2 Interface
-UML Interface Diagram 
+```java 
+// Shape s = new Shape(); // **COMPILATION ERROR!** Cannot instantiate an abstract class.
+Shape c = new Circle(); // **CORRECT.** We can create an object of the concrete subclass.
+```
 
-implements ilişkisi ok ile gösterilir (kesik çizgi, boş üçgen uç)
+## 8.2 Interface    
+
+İnterface , bir sınıfın taslağı olarak düşünülebilir. Temel amacı, implement edilen sınıfların uyması gereken bir dizi metodun definenation sunmaktır. İnterface, Java'da  multiple inheritance davranışsal yönünü gerçekleştirmek için kullanılır.implements ilişkisi ok ile gösterilir (kesik çizgi, boş üçgen uç)
+
+
 ### 8.2.1 interface Tanımlama
+```java 
+interface Animal {
+    void sound();   // public abstract olarak kabul edilir
+    void eat();
+}
+```
 
 ### 8.2.2 implements ile Uygulama
 
-### 8.2.3 Çoklu Interface Implementasyonu
+```java 
+Bir sınıf, interface’i implements anahtar kelimesiyle uygular:
+class Dog implements Animal {
+    @Override
+    public void sound() {
+        System.out.println("Hav hav");
+    }
 
+    @Override
+    public void eat() {
+        System.out.println("Köpek mama yer.");
+    }
+}
+```
+### 8.2.3 Çoklu Interface Implementasyonu
+Bir sınıf birden fazla interface implement edebilir:
+```java 
+interface Flyable {
+    void fly();
+}
+
+interface Swimmable {
+    void swim();
+}
+
+class Duck implements Flyable, Swimmable {
+    public void fly() { System.out.println("Ördek uçar."); }
+    public void swim() { System.out.println("Ördek yüzer."); }
+}
+```
 ### 8.2.4 Default ve Static Metotlar (Java 8 Sonrası)
 
+Java 8’den itibaren interface’lerde default ve static metotlar yazılabilir:
+```java 
+interface Vehicle {
+    void start();
+
+    default void stop() {  // gövdeli metod
+        System.out.println("Araç durdu.");
+    }
+
+    static void service() {
+        System.out.println("Araç servise girdi.");
+    }
+}
+```
 ## 8.3 Abstract Class vs Interface
-7.3 Abstract Class vs Interface
 
-Yan yana UML diyagramları (abstract class ve interface farklarını göstermek için)
-### 8.3.1 Çoklu Kalıtım → Sadece Interface
+| Özellik        | Abstract Class                                      | Interface                                               |
+| -------------- | --------------------------------------------------- | ------------------------------------------------------- |
+| Çoklu kalıtım  | ❌ (sadece tek bir abstract class extend edilebilir) | ✅ (bir sınıf birden fazla interface implement edebilir) |
+| Constructor    | ✅ olabilir                                          | ❌ olamaz                                                |
+| Metot türleri  | abstract, normal (gövdesi olan), static, final      | public abstract (default: Java 8+), static (Java 8+)    |
+| Alanlar        | Her türlü değişken olabilir                         | public static final sabitler                            |
+| Kullanım amacı | “is-a” ilişkisi (kalıtım hiyerarşisi)               | “can-do” ilişkisi (yetkinlik/özellik)                   |
 
-### 8.3.2 Constructor → Sadece Abstract Class
+## 9 ekstra kısımlar
 
-### 8.3.3 Metot Türleri → Interface (public abstract), Abstract Class (Farklı Türler)
+### 9.1 Final Keywords
 
-## 8.4 Static and Final Keywords
+- **final class** → extend edilemez.
+    
+- **final method** → override edilemez.
+    
+- **final variable** → sabit (const) olur, değiştirilemez.
