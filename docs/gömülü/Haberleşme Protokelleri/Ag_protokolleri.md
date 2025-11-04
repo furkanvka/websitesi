@@ -4,6 +4,8 @@
 
 Uluslararası Standardizasyon Örgütü tarafından oluşturulan Osi modeli iletişimini 7 temel hatta bölerek çeşitli aglarn iletişimi için  belli bir standrat sunan bir kavramdır.Osi modeli bilgisayar agları için uluslararası bir dil olark düşünelebilir.
 
+https://www.youtube.com/watch?v=kCuyS7ihr_E
+
 ![osi](Picture2-3.jpg)
 
 ### Physical Layer (Fiziksel Katman): 

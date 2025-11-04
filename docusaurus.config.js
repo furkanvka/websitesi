@@ -1,12 +1,9 @@
 // @ts-check
 // `@type` JSDoc annotations allow editor autocompletion and type checking
 // (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -14,23 +11,17 @@ const config = {
   tagline: 'Programlama seviyom',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  // Site URL
+  url: 'https://furkanvural.net',
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'furkan_vka', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  // GitHub pages config
+  organizationName: 'furkan',
+  projectName: 'docusaurus',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'tr',
     locales: ['tr'],
@@ -45,7 +36,7 @@ const config = {
           sidebarPath: './sidebars.js',
           remarkPlugins: [require('remark-math')],
           rehypePlugins: [require('rehype-katex')],
-       },
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -56,13 +47,16 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'light',           // Her zaman aydınlık tema
+        disableSwitch: true,            // Tema değiştirme butonunu gizle
+        respectPrefersColorScheme: false, // Sistem temasını dikkate alma
+      },
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Furkan Vural',
         logo: {
           alt: 'Logo',
-          src: 'img/logo-light.png',      // Açık tema için
-          srcDark: 'img/logo-dark.png',   // Koyu tema için
+          src: 'img/logo-light.png',    // Her zaman açık tema logosu
         },
         items: [
           {
@@ -87,8 +81,8 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'ArastirmaSidebar',
             position: 'left',
-            label: 'arastirma',
-          }
+            label: 'Araştırma',
+          },
         ],
       },
       footer: {
@@ -98,7 +92,7 @@ const config = {
             items: [
               {
                 label: 'LinkedIn',
-                href: 'https://www.linkedin.com/in/furkan-vural-508b2028b/', 
+                href: 'https://www.linkedin.com/in/furkan-vural-508b2028b/',
               },
             ],
           },
@@ -112,12 +106,10 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} [Furkan Vural] - Tüm Hakları Saklıdır.`,
+        copyright: `© ${new Date().getFullYear()} Furkan Vural - Tüm Hakları Saklıdır.`,
       },
-
       prism: {
-        theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
+        theme: prismThemes.github, // Sadece açık tema kullanılacak
       },
     }),
 };

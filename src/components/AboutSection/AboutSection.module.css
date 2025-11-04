@@ -1,0 +1,89 @@
+.about {
+  background-color: #bebcbc;
+  padding: 6rem 1rem;
+}
+
+.aboutHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.aboutHeader h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.aboutUnderline {
+  width: 50px;
+  height: 4px;
+  background-color: #8b5e3c;
+  margin: 0 auto 1rem;
+  border-radius: 10px;
+}
+
+.aboutHeader p {
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.aboutContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  gap: 3rem;
+}
+
+.aboutColumn h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.aboutColumn p {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skillItem {
+  background-color: #aeadad;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.contactButton {
+  display: inline-block;
+  background-color: #8b5e3c;
+  color: white;
+  padding: 0.8rem 1.8rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.contactButton:hover {
+  background-color: #6d28d9;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .aboutContent {
+    grid-template-columns: 1fr;
+  }
+}
