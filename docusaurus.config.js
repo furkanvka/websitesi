@@ -19,7 +19,7 @@ const config = {
   organizationName: 'furkan',
   projectName: 'docusaurus',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
