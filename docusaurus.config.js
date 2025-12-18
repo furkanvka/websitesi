@@ -83,6 +83,17 @@ const config = {
             position: 'left',
             label: 'Araştırma',
           },
+          {
+            label: 'Chatbot',
+            position: 'right',
+            to: '/chatbot',
+          },
+          {
+            label: 'Simülasyon',
+            position: 'right',
+            to: '/simulasyon',
+          },
+
         ],
       },
       footer: {
@@ -109,7 +120,7 @@ const config = {
         copyright: `© ${new Date().getFullYear()} Furkan Vural - Tüm Hakları Saklıdır.`,
       },
       prism: {
-        theme: prismThemes.github, // Sadece açık tema kullanılacak
+        theme: prismThemes.github,
       },
     }),
 };
